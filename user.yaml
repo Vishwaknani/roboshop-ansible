@@ -60,7 +60,7 @@
     
 
   - name: gets the user count
-    ansible.builtin.command: mongo --host mongodb.devopsrank.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+    ansible.builtin.command: mongo --host mongodb.vishwak.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
     register: user_count
 
   # - name: print the count
@@ -68,7 +68,7 @@
   #     msg: "user count is {{ user_count }}"
 
   - name: load user
-    ansible.builtin.command: mongo --host mongodb.devopsrank.online < /app/schema/user.js
+    ansible.builtin.command: mongo --host mongodb.vishwak.online < /app/schema/user.js
     when: user_count.stdout == "0" 
 
   - name: start and enable user
