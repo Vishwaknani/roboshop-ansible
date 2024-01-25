@@ -12,4 +12,7 @@
       path: /user/share/nginx/html
       state: directory
 
-   
+   - name: Download web app
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/web.zip
+      dest: /tmp
