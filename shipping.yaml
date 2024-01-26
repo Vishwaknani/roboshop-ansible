@@ -1,7 +1,7 @@
 - name: install shipping componends
   hosts: shipping
   become: yes
-  
+
   tasks:
   - name: install maven
     ansible.builtin.dnf:
@@ -56,5 +56,17 @@
     ansible.builtin.dnf:
       name: mysql
       state: present
+
+  - name: check cities schema exists or not
+    ansible.builtin.command:  mysql -h mysql.vishwak.online -uroot -p{{mysql_password}} -sN -e "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'cities'"
+    register: schema
+
+  - name: print output
+    ansible.builtin.debug:
+      msg: "schema output: {{schema}}"
+
+  - name: load cities data
+    ansible.builtin.shell: "mysql -h mysql.vishwak.online -uroot -p{{mysql_password}}  < /app/schema/shipping.sql"
+    when: schema.stdout != "1"
 
   
