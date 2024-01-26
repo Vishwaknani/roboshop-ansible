@@ -10,8 +10,8 @@
       src: mysql.repo
       dest: /etc/yum.repos.d/mysql.repo
 
-  - name: install mysql server
-    ansible.builin.package:
+  - name: install mysql
+     ansible.builtin.dnf:
       name: mysql-community-server
       state: present
 
