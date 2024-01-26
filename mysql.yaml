@@ -1,4 +1,4 @@
-- name: install myssql componeds
+- name: install mysql componeds
   hosts: mysql
   become: yes
   tasks:
